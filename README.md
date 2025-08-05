@@ -2,7 +2,9 @@
 
 A simple **AI-powered chatbot web app** built using **Python Flask** and **ChatterBot**.  
 The chatbot is trained with greetings, jokes, study tips, motivation, trivia, and wellness advice.  
+
 ---
+
 ## 🚀 Features
 - 💬 Interactive web-based chatbot UI  
 - 🔥 Built with Flask (Python)  
@@ -17,7 +19,9 @@ The chatbot is trained with greetings, jokes, study tips, motivation, trivia, an
   - Tech & Programming Tips
   - General Knowledge & Trivia
   - Health & Wellness
+  - 
 ---
+
 ## 📂 Project Structure
 chatbot-project/
 │ app.py # Flask backend
@@ -84,10 +88,10 @@ Edit
 gunicorn app:app
 📸 Screenshots
 🔹 Light Mode
-
+<img src="https://github.com/Spidy20/Flask_NLP_ChatBot/blob/master/1.png">
 
 🔹 Dark Mode
-
+<img src="https://github.com/Spidy20/Flask_NLP_ChatBot/blob/master/1.png">
 
 🙌 Contributing
 Pull requests are welcome! For major changes, open an issue first to discuss what you’d like to change.
