@@ -88,7 +88,7 @@ Edit
 gunicorn app:app
 📸 Screenshots
 🔹 Light Mode
-<img src="https://github.com/Spidy20/Flask_NLP_ChatBot/blob/master/1.png">
+<img src="https://github.com/sc1030/Flask-Chatbot/blob/main/Screenshot%202025-08-05%20164812.png">
 
 🔹 Dark Mode
 <img src="https://github.com/Spidy20/Flask_NLP_ChatBot/blob/master/1.png">
