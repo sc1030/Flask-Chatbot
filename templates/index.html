@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ChatBot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <section class="chat-container">
+      <!-- Header -->
+      <header class="chat-header">
+        <div class="chat-header-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+            alt="bot"
+            class="bot-avatar"
+          />
+          <div>
+            <h2>ChatBot</h2>
+            <span class="status">Online</span>
+          </div>
+        </div>
+        <button id="toggle-theme"><i class="fas fa-moon"></i></button>
+      </header>
+
+      <!-- Chat Area -->
+      <main class="chat-box" id="chat-box">
+        <div class="msg left-msg">
+          <div
+            class="msg-img"
+            style="
+              background-image: url('https://cdn-icons-png.flaticon.com/512/4712/4712109.png');
+            "
+          ></div>
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">ChatBot</div>
+              <div class="msg-info-time">Now</div>
+            </div>
+            <div class="msg-text">Hi, welcome to ChatBot! 👋</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Input Area -->
+      <form class="chat-inputarea">
+        <button type="button" class="chat-icon">
+          <i class="far fa-smile"></i>
+        </button>
+        <input
+          type="text"
+          class="chat-input"
+          id="textInput"
+          placeholder="Type a message..."
+        />
+        <button type="submit" class="chat-send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </section>
+
+    <script>
+      const chatForm = document.querySelector(".chat-inputarea");
+      const chatInput = document.querySelector("#textInput");
+      const chatBox = document.querySelector("#chat-box");
+
+      const BOT_IMG = "https://cdn-icons-png.flaticon.com/512/4712/4712109.png";
+      const PERSON_IMG =
+        "https://cdn-icons-png.flaticon.com/512/2202/2202112.png";
+      const BOT_NAME = "ChatBot";
+      const PERSON_NAME = "You";
+
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const msgText = chatInput.value.trim();
+        if (!msgText) return;
+
+        appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+        chatInput.value = "";
+        botResponse(msgText);
+      });
+
+      function appendMessage(name, img, side, text) {
+        const msgHTML = `
+      <div class="msg ${side}-msg">
+        <div class="msg-img" style="background-image: url(${img})"></div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">${name}</div>
+            <div class="msg-info-time">${formatDate(new Date())}</div>
+          </div>
+          <div class="msg-text">${text}</div>
+        </div>
+      </div>`;
+
+        chatBox.insertAdjacentHTML("beforeend", msgHTML);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function botResponse(rawText) {
+        $.get("/get", { msg: rawText }).done((data) => {
+          appendMessage(BOT_NAME, BOT_IMG, "left", data);
+        });
+      }
+
+      function formatDate(date) {
+        const h = ("0" + date.getHours()).slice(-2);
+        const m = ("0" + date.getMinutes()).slice(-2);
+        return `${h}:${m}`;
+      }
+
+      // Dark Mode Toggle
+      document.getElementById("toggle-theme").addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    </script>
+  </body>
+</html>
